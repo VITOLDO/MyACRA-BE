@@ -1,0 +1,8 @@
+<Context path="/exchangeStock" swallowOutput="true" reloadable="true">
+    <Resource name="jdbc/ACRA_DB" auth="Container"
+              type="javax.sql.DataSource"
+              driverClassName="com.mysql.jdbc.Driver"
+              url="jdbc:mysql://localhost:3306/acra_db"
+              username="acra_user" password="acra_user"
+              maxActive="20" maxIdle="10" maxWiat="60"/>
+</Context>
