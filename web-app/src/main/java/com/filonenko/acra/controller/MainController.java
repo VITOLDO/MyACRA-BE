@@ -21,6 +21,7 @@ public class MainController {
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String home(HttpServletRequest request) {
         request.getSession().setAttribute("hello","world");
+        request.getSession().setAttribute("main", mainService.findMain(1));
         return "home";
     }
 }
