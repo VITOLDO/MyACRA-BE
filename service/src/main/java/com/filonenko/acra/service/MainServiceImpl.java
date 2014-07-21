@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * @author: Viktor, Filonenko
  * @since: 15.04.14
@@ -19,5 +21,17 @@ public class MainServiceImpl implements MainService {
     @Transactional
     public Main findMain(int id) {
         return mainDao.getMainById(id);
+    }
+
+    @Override
+    public List<Main> findAll() {
+        return mainDao.findAll();
+    }
+
+    @Override
+    public void create(String mainText) {
+        Main main = new Main();
+        main.setValue(mainText);
+        mainDao.create(main);
     }
 }

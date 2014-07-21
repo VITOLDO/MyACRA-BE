@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @author: Viktor, Filonenko
  * @since: 15.04.14
@@ -18,5 +20,15 @@ public class MainDaoImpl implements MainDao {
     @Override
     public Main getMainById(int id) {
         return hibernateTemplate.get(Main.class, id);
+    }
+
+    @Override
+    public void create(Main main) {
+        hibernateTemplate.save(main);
+    }
+
+    @Override
+    public List<Main> findAll() {
+        return hibernateTemplate.loadAll(Main.class);
     }
 }

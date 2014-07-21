@@ -1,5 +1,7 @@
 package com.filonenko.servlet;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.text.ParseException;
 
 /**
  * @author: Viktor, Filonenko
@@ -25,19 +28,19 @@ public class JsonStockData extends HttpServlet {
         String line = null;
         try {
             BufferedReader reader = req.getReader();
-            while ((line = reader.readLine()) != null)
-                jb.append(line);
-        } catch (Exception e) { /*report an error*/ }
+            while ((line = reader.readLine()) != null) jb.append(line);
+
+        } catch (Exception e) {
+            LOG.error("Something went wrong {}", e);
+        }
 
         LOG.debug("Current JSON is: " + jb.toString());
 
-        /*try {
-
-            JSONObject jsonObject = JSONObject.fromObject(jb.toString());
-        } catch (ParseException e) {
-            // crash and burn
-            throw new IOException("Error parsing JSON request string");
-        }*/
+        try {
+            JSONObject obj = new JSONObject(jb.toString());
+        } catch (JSONException e) {
+            LOG.error("Parser exception {}", e);
+        }
 
         // Work with the data using methods like...
         // int someInt = jsonObject.getInt("intParamName");
