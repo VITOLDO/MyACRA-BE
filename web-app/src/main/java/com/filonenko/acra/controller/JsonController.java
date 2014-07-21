@@ -27,14 +27,14 @@ public class JsonController {
 
     @RequestMapping(value = "/json", method = RequestMethod.POST)
     @ResponseBody
-    public String home(@RequestBody String text) {
+    public JsonResponse home(@RequestBody String text) {
         LOG.trace("text in controller is {}", text);
         try {
             mainService.create(text);
         } catch (Exception e) {
             LOG.error("Saving JSON Request failed due to {}", e);
-            return "{status:\"Error\"}";
+            return new JsonResponse("Error", "500");
         }
-        return "{status:\"Ok\"}";
+        return new JsonResponse("Ok", "200");
     }
 }
